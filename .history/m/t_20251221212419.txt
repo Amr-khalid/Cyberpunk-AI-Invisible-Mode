@@ -1,0 +1,51 @@
+<mxfile host="app.diagrams.net" modified="2025-12-21T14:00:00.000Z" agent="DarkClassGen" version="22.1.0" type="device">
+  <diagram id="ClassDiagram" name="Connect 4 Class Diagram">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#1E1E1E" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="cls_main" value="Connect4Engine" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fontSize=18;fillColor=#252526;strokeColor=#007ACC;fontColor=#FFFFFF;rounded=1;arcSize=10;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="80" width="460" height="520" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_attr" value="+ ROW_COUNT: int = 6&#xa;+ COLUMN_COUNT: int = 7&#xa;+ PLAYER: int = 0&#xa;+ AI: int = 1&#xa;+ EMPTY: int = 0&#xa;+ PLAYER_PIECE: int = 1&#xa;+ AI_PIECE: int = 2&#xa;+ WINDOW_LENGTH: int = 4" style="text;strokeColor=none;fillColor=#2D2D2D;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#DCDCAA;fontFamily=Consolas;fontSize=14;" vertex="1" parent="cls_main">
+          <mxGeometry y="30" width="460" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sep1" value="" style="line;strokeWidth=2;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#007ACC;" vertex="1" parent="cls_main">
+          <mxGeometry y="180" width="460" height="10" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_meth" value="+ create_board(): ndarray&#xa;+ drop_piece(board, row, col, piece): void&#xa;+ is_valid_location(board, col): bool&#xa;+ get_next_open_row(board, col): int&#xa;+ get_valid_locations(board): List[int]&#xa;+ winning_move(board, piece): bool&#xa;+ is_terminal_node(board): bool&#xa;&#xa;# AI Heuristics&#xa;+ evaluate_window(window, piece): int&#xa;+ score_position(board, piece): int&#xa;&#xa;# Core Algorithm&#xa;+ minimax(board, depth, alpha, beta, maxPlayer): (col, score)" style="text;strokeColor=none;fillColor=#2D2D2D;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=#4EC9B0;fontFamily=Consolas;fontSize=14;" vertex="1" parent="cls_main">
+          <mxGeometry y="190" width="460" height="330" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lib_numpy" value="numpy" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#6A00FF;strokeColor=none;fontColor=#FFFFFF;gradientColor=#AA00FF;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="850" y="150" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lib_math" value="math" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#C4302B;strokeColor=none;fontColor=#FFFFFF;gradientColor=#FF5555;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="850" y="260" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lib_random" value="random" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#28A745;strokeColor=none;fontColor=#FFFFFF;gradientColor=#55FF55;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="850" y="370" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="link_np" value="&amp;lt;&amp;lt;import&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;strokeColor=#AAAAAA;fontColor=#CCCCCC;entryX=0;entryY=0.5;exitX=1.002;exitY=0.18;" edge="1" parent="1" source="cls_meth" target="lib_numpy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="link_math" value="&amp;lt;&amp;lt;import&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;strokeColor=#AAAAAA;fontColor=#CCCCCC;entryX=0;entryY=0.5;exitX=1.002;exitY=0.45;" edge="1" parent="1" source="cls_meth" target="lib_math">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="link_rnd" value="&amp;lt;&amp;lt;import&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;strokeColor=#AAAAAA;fontColor=#CCCCCC;entryX=0;entryY=0.5;exitX=1.002;exitY=0.75;" edge="1" parent="1" source="cls_meth" target="lib_random">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

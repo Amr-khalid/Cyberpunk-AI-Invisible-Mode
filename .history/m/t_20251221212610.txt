@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" modified="2025-12-21T15:00:00.000Z" agent="PremiumGen" version="22.1.0" type="device">
+  <diagram id="PremiumClassDiagram" name="Premium Class Diagram">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="cls_frame" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="320" y="80" width="480" height="560" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_header" value="Connect4Game" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=10;fillColor=#6a11cb;strokeColor=none;fontColor=#ffffff;fontStyle=1;fontSize=20;gradientColor=#2575fc;gradientDirection=east;" vertex="1" parent="cls_frame">
+          <mxGeometry x="0" y="0" width="480" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_attr_bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#e5e7eb;align=left;verticalAlign=top;" vertex="1" parent="cls_frame">
+          <mxGeometry x="0" y="60" width="480" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_attr_text" value="&lt;font color=&quot;#d97706&quot;&gt;●&lt;/font&gt; &lt;b&gt;ROW_COUNT&lt;/b&gt;: int = 6&#xa;&lt;font color=&quot;#d97706&quot;&gt;●&lt;/font&gt; &lt;b&gt;COLUMN_COUNT&lt;/b&gt;: int = 7&#xa;&lt;font color=&quot;#d97706&quot;&gt;●&lt;/font&gt; &lt;b&gt;WINDOW_LENGTH&lt;/b&gt;: int = 4&#xa;---------------------------------------------&#xa;&lt;font color=&quot;#2563eb&quot;&gt;●&lt;/font&gt; PLAYER: int = 0&#xa;&lt;font color=&quot;#2563eb&quot;&gt;●&lt;/font&gt; AI: int = 1&#xa;&lt;font color=&quot;#2563eb&quot;&gt;●&lt;/font&gt; PLAYER_PIECE: int = 1&#xa;&lt;font color=&quot;#2563eb&quot;&gt;●&lt;/font&gt; AI_PIECE: int = 2&#xa;&lt;font color=&quot;#9ca3af&quot;&gt;●&lt;/font&gt; EMPTY: int = 0" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Courier New;fontColor=#374151;spacingLeft=20;" vertex="1" parent="cls_frame">
+          <mxGeometry x="0" y="60" width="480" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_meth_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=10;fillColor=#ffffff;strokeColor=#e5e7eb;align=left;verticalAlign=top;" vertex="1" parent="cls_frame">
+          <mxGeometry x="0" y="220" width="480" height="340" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="cls_meth_mask" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="cls_frame">
+          <mxGeometry x="0" y="220" width="480" height="10" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_meth_text" value="&lt;font color=&quot;#10b981&quot;&gt;●&lt;/font&gt; create_board(): &lt;i&gt;ndarray&lt;/i&gt;&#xa;&lt;font color=&quot;#10b981&quot;&gt;●&lt;/font&gt; drop_piece(board, row, col, piece): &lt;i&gt;void&lt;/i&gt;&#xa;&lt;font color=&quot;#10b981&quot;&gt;●&lt;/font&gt; is_valid_location(board, col): &lt;i&gt;bool&lt;/i&gt;&#xa;&lt;font color=&quot;#10b981&quot;&gt;●&lt;/font&gt; get_next_open_row(board, col): &lt;i&gt;int&lt;/i&gt;&#xa;&lt;font color=&quot;#10b981&quot;&gt;●&lt;/font&gt; winning_move(board, piece): &lt;i&gt;bool&lt;/i&gt;&#xa;---------------------------------------------&#xa;&lt;font color=&quot;#8b5cf6&quot;&gt;●&lt;/font&gt; score_position(board, piece): &lt;i&gt;int&lt;/i&gt;&#xa;&lt;font color=&quot;#8b5cf6&quot;&gt;●&lt;/font&gt; evaluate_window(window, piece): &lt;i&gt;int&lt;/i&gt;&#xa;&lt;font color=&quot;#8b5cf6&quot;&gt;●&lt;/font&gt; &lt;b&gt;minimax&lt;/b&gt;(board, depth, alpha, beta): &lt;i&gt;Tuple&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Courier New;fontColor=#1f2937;spacingLeft=20;" vertex="1" parent="cls_frame">
+          <mxGeometry x="0" y="220" width="480" height="340" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lib_numpy" value="numpy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0ea5e9;strokeColor=none;fontColor=#ffffff;fontStyle=1;fontSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="150" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lib_math" value="math" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f43f5e;strokeColor=none;fontColor=#ffffff;fontStyle=1;fontSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="220" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lib_random" value="random" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10b981;strokeColor=none;fontColor=#ffffff;fontStyle=1;fontSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="290" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="conn_np" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#cbd5e1;strokeWidth=2;dashed=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="cls_frame" target="lib_numpy">
+          <mxGeometry relative="1" as="geometry">
+             <mxPoint x="800" y="170" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conn_math" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#cbd5e1;strokeWidth=2;dashed=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="cls_frame" target="lib_math">
+          <mxGeometry relative="1" as="geometry">
+             <mxPoint x="800" y="240" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conn_rand" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#cbd5e1;strokeWidth=2;dashed=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="cls_frame" target="lib_random">
+          <mxGeometry relative="1" as="geometry">
+             <mxPoint x="800" y="310" as="sourcePoint"/>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

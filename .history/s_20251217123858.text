@@ -1,0 +1,140 @@
+<mxfile host="app.diagrams.net" modified="2025-12-17T17:00:00.000Z" agent="SequenceGenerator" version="22.1.0" type="device">
+  <diagram id="DetailedSequence" name="Sequence Diagram">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="user" value="User / Client" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="40" height="700" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flask" value=":Flask Server&#xa;(app.py)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="250" y="80" width="140" height="700" as="geometry" />
+        </mxCell>
+
+        <mxCell id="file" value=":FileSystem&#xa;(data.json)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="500" y="80" width="120" height="700" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ai" value=":AI Model&#xa;(sklearn)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="750" y="80" width="120" height="700" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg1" value="POST /play (user_move)" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="user" target="flask">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="70" y="160" as="sourcePoint" />
+            <mxPoint x="310" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg2" value="getData()" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="flask" target="flask">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="190" as="sourcePoint" />
+            <mxPoint x="320" y="230" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="190" />
+              <mxPoint x="370" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg3" value="json.load(f)" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="flask" target="file">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="260" as="sourcePoint" />
+            <mxPoint x="550" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg4" value="history, stats" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="file" target="flask">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="550" y="290" as="sourcePoint" />
+            <mxPoint x="320" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="frame1" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=40;height=20;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="180" y="320" width="650" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_cond1" value="[history &gt; 5]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="220" y="320" width="80" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg5" value="model.fit(userSteps, aiSteps)" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="flask" target="ai">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="360" as="sourcePoint" />
+            <mxPoint x="800" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg6" value="model.predict(lastMove)" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="flask" target="ai">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="400" as="sourcePoint" />
+            <mxPoint x="800" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg7" value="prediction" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="ai" target="flask">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="800" y="430" as="sourcePoint" />
+            <mxPoint x="320" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="line_sep" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" edge="1" parent="1" source="frame1" target="frame1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="460" as="sourcePoint" />
+            <mxPoint x="830" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_else" value="[else]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="220" y="460" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="msg8" value="random.randint(0, 2)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="flask" target="flask">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="480" as="sourcePoint" />
+            <mxPoint x="320" y="510" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="480" />
+              <mxPoint x="370" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg9" value="Determine Winner &amp; Update Stats" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="flask" target="flask">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="550" as="sourcePoint" />
+            <mxPoint x="320" y="580" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="550" />
+              <mxPoint x="370" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg10" value="save(new_data)" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="flask" target="file">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="610" as="sourcePoint" />
+            <mxPoint x="550" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg11" value="json.dump()" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="file" target="file">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="560" y="630" as="sourcePoint" />
+            <mxPoint x="560" y="660" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="600" y="630" />
+              <mxPoint x="600" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg12" value="return JSON (result, ai_move)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="flask" target="user">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="320" y="690" as="sourcePoint" />
+            <mxPoint x="70" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

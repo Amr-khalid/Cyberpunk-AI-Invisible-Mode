@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyberpunk AI: Invisible Mode</title>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+  
+  <style>
+    /* --- التنسيق الأسطوري (Cyberpunk Style) --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { overflow: hidden; background-color: #050505; font-family: 'Courier New', Courier, monospace; color: #00f2ff; }
+
+    /* لوحة النتيجة */
+    .score-container { display: flex; justify-content: center; width: 100%; position: fixed; top: 20px; z-index: 10; }
+    .score-box {
+      height: 55px; width: 160px; backdrop-filter: blur(10px);
+      font-weight: 900; font-size: 1.3rem; border: none; text-align: center; color: #fff;
+    }
+    .humans { background: linear-gradient(to right, rgba(0, 242, 255, 0.4), transparent); border-radius: 30px 0 0 30px; border-right: 2px solid #00f2ff; }
+    .ais { background: linear-gradient(to left, rgba(255, 0, 85, 0.4), transparent); border-radius: 0 30px 30px 0; border-left: 2px solid #ff0055; }
+
+    /* منطقة اللعب والأيدي الكبيرة */
+    .game-container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    .hands-box { display: flex; justify-content: space-around; width: 95vw; align-items: center; }
+    img.hand-img { 
+      width: 48vw; /* تكبير الأيدي كما طلبت */
+      max-width: 600px; height: auto; 
+      filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.2));
+      transition: transform 0.3s ease;
+    }
+    
+    /* أنيميشن الاهتزاز */
+    .shake { animation: shakeAnim 0.5s infinite; }
+    @keyframes shakeAnim {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-40px) rotate(5deg); }
+    }
+
+    /* مربع الرادار (إظهار الخطوط فقط) */
+    #output {
+      position: fixed; right: 20px; bottom: 20px; width: 300px; height: 220px;
+      border: 2px solid #00f2ff; border-radius: 15px;
+      box-shadow: 0 0 20px #00f2ff60;
+      z-index: 100; transform: scaleX(-1); /* Mirror Effect */
+      background: #000; /* خلفية سوداء لإخفاء وجهك */
+    }
+
+    /* النصوص التنبيهية */
+    #countdown {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-size: 80px; font-weight: 900; text-shadow: 0 0 40px #00f2ff;
+      display: none; z-index: 999; text-align: center;
+    }
+    #bg { position: fixed; top:0; left:0; width: 100%; height: 100%; z-index: -1; object-fit: cover; opacity: 0.6; }
+    #resetBtn { position: fixed; top: 25px; left: 25px; padding: 10px; background: none; border: 1px solid #ff0055; color: #ff0055; cursor: pointer; z-index: 1000; }
+  </style>
+</head>
+<body>
+  <video id="video" autoplay playsinline style="display: none;"></video>
+  <canvas id="output" width="640" height="480"></canvas>
+
+  <div id="countdown"></div>
+  <button id="resetBtn" onclick="resetStats()">RESET_SYSTEM</button>
+  <img src="public/bg2.png" id="bg" />
+
+  <div class="score-container">
+    <input type="text" readonly id="humanScore" value="HUMAN: 0" class="score-box humans" />
+    <input type="text" readonly id="aiScore" value="AI: 0" class="score-box ais" />
+  </div>
+
+  <div class="game-container">
+    <div class="hands-box">
+      <img src="public/rh.png" id="humanHand" class="hand-img" />
+      <img src="public/rr.png" id="aiHand" class="hand-img" />
+    </div>
+  </div>
+
+  <script>
+    // --- متغيرات اللعبة والحفظ ---
+    const moveMap = ["rock", "paper", "scissors"];
+    const assets = {
+      rock: { human: "public/rh.png", ai: "public/rr.png" },
+      paper: { human: "public/ph.png", ai: "public/pr.png" },
+      scissors: { human: "public/sh.png", ai: "public/sr.png" }
+    };
+    
+    let isGameRunning = false;
+    let stats = JSON.parse(localStorage.getItem('amr_ai_stats')) || { wins: 0, losses: 0 };
+
+    function updateScoreUI() {
+      document.getElementById("humanScore").value = `HUMAN: ${stats.wins}`;
+      document.getElementById("aiScore").value = `AI: ${stats.losses}`;
+      localStorage.setItem('amr_ai_stats', JSON.stringify(stats));
+    }
+    updateScoreUI();
+
+    function resetStats() { stats = { wins: 0, losses: 0 }; updateScoreUI(); }
+
+    // --- منطق الذكاء الاصطناعي للرؤية ---
+    const videoEl = document.getElementById("video");
+    const canvasEl = document.getElementById("output");
+    const ctx = canvasEl.getContext("2d");
+
+    function drawGrid() {
+      ctx.strokeStyle = "rgba(0, 242, 255, 0.15)";
+      ctx.lineWidth = 1;
+      for(let i=0; i<640; i+=30) { ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,480); ctx.stroke(); }
+      for(let i=0; i<480; i+=30) { ctx.beginPath(); ctx.moveTo(0,i); ctx.lineTo(640,i); ctx.stroke(); }
+    }
+
+    function onResults(results) {
+      ctx.save();
+      // إخفاء الكاميرا الحقيقية ورسم الخلفية السوداء والشبكة
+      ctx.clearRect(0, 0, 640, 480);
+      ctx.fillStyle = "#050505";
+      ctx.fillRect(0, 0, 640, 480);
+      drawGrid();
+
+      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        const landmarks = results.multiHandLandmarks[0];
+        
+        // رسم "الرجل الخفي" (الخطوط فقط)
+        drawConnectors(ctx, landmarks, HAND_CONNECTIONS, {color: '#00f2ff', lineWidth: 5});
+        drawLandmarks(ctx, landmarks, {color: '#ff0055', lineWidth: 1, radius: 4});
+        
+        // اكتشاف الحركة
+        if (!isGameRunning) {
+          const move = detectGesture(landmarks);
+          if (move) startGameSequence(move);
+        }
+      }
+      ctx.restore();
+    }
+
+    // --- دالة اكتشاف الحركة المطورة (High Accuracy) ---
+function detectGesture(lm) {
+  // تعريف المفاصل (Tips vs Knuckles)
+  const tips = [8, 12, 16, 20]; // رؤوس الأصابع
+  const joints = [6, 10, 14, 18]; // المفاصل الوسطى
+  
+  // فحص كل إصبع: هل هو مرفوع (Tip أعلى من الـ Joint)؟
+  const isIndexUp = lm[8].y < lm[6].y;
+  const isMiddleUp = lm[12].y < lm[10].y;
+  const isRingUp = lm[16].y < lm[14].y;
+  const isPinkyUp = lm[20].y < lm[18].y;
+  const isThumbUp = lm[4].x < lm[3].x; // فحص الإبهام أفقياً (للمرسال الأيمن)
+
+  // 1. منطق الـ ROCK (كل الأصابع مقفولة)
+  if (!isIndexUp && !isMiddleUp && !isRingUp && !isPinkyUp) {
+    return "rock";
+  }
+
+  // 2. منطق الـ SCISSORS (السبابة والوسطى فقط مرفوعين)
+  if (isIndexUp && isMiddleUp && !isRingUp && !isPinkyUp) {
+    return "scissors";
+  }
+
+  // 3. منطق الـ PAPER (كل الأصابع مفرودة)
+  if (isIndexUp && isMiddleUp && isRingUp && isPinkyUp) {
+    return "paper";
+  }
+
+  return null;
+}
+
+// --- تعديل في دالة onResults لزيادة الثبات ---
+let stableFrameCount = 0;
+let lastDetectedMove = null;
+const CONFIDENCE_REQUIRED = 12; // لازم الـ AI يشوف الحركة لـ 12 فريم ورا بعض عشان يصدق
+
+function onResults(results) {
+  ctx.save();
+  ctx.clearRect(0, 0, 640, 480);
+  ctx.fillStyle = "#050505";
+  ctx.fillRect(0, 0, 640, 480);
+  drawGrid();
+
+  if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+    const landmarks = results.multiHandLandmarks[0];
+    
+    // رسم الهيكل العظمي بلون نيون بيتغير لما يكتشف حركة
+    let glowColor = isGameRunning ? '#ff0055' : '#00f2ff';
+    drawConnectors(ctx, landmarks, HAND_CONNECTIONS, {color: glowColor, lineWidth: 5});
+    drawLandmarks(ctx, landmarks, {color: '#ffffff', lineWidth: 1, radius: 4});
+    
+    const currentMove = detectGesture(landmarks);
+
+    if (currentMove && currentMove === lastDetectedMove) {
+      stableFrameCount++;
+      // تأثير بصري لما الـ AI يبدأ يتأكد
+      if (stableFrameCount > 5) {
+         ctx.strokeStyle = "#39FF14"; // نيون أخضر للتأكيد
+         ctx.lineWidth = 8;
+         ctx.strokeRect(5, 5, 630, 470);
+      }
+    } else {
+      lastDetectedMove = currentMove;
+      stableFrameCount = 0;
+    }
+
+    if (stableFrameCount >= CONFIDENCE_REQUIRED && !isGameRunning && currentMove) {
+      startGameSequence(currentMove);
+      stableFrameCount = 0;
+    }
+  }
+  ctx.restore();
+}
+
+    // --- تسلسل الجولة ---
+    function startGameSequence(humanMove) {
+      isGameRunning = true;
+      let count = 3;
+      const cd = document.getElementById("countdown");
+      cd.style.display = "block";
+      
+      const timer = setInterval(() => {
+        document.getElementById("humanHand").classList.add("shake");
+        document.getElementById("aiHand").classList.add("shake");
+        cd.innerText = count;
+        count--;
+        if (count < 0) {
+          clearInterval(timer);
+          executeResult(humanMove);
+        }
+      }, 700);
+    }
+
+    function executeResult(hMove) {
+      const aMove = moveMap[Math.floor(Math.random() * 3)];
+      document.getElementById("humanHand").src = assets[hMove].human;
+      document.getElementById("aiHand").src = assets[aMove].ai;
+      document.getElementById("humanHand").classList.remove("shake");
+      document.getElementById("aiHand").classList.remove("shake");
+
+      let res = (hMove === aMove) ? "DRAW" : 
+                ((hMove==="rock" && aMove==="scissors") || (hMove==="paper" && aMove==="rock") || (hMove==="scissors" && aMove==="paper")) ? "WIN" : "LOSS";
+
+      if(res === "WIN") { stats.wins++; document.getElementById("bg").src = "public/bgh.png"; }
+      else if(res === "LOSS") { stats.losses++; document.getElementById("bg").src = "public/bgr.png"; }
+      
+      document.getElementById("countdown").innerText = res === "WIN" ? "SYSTEM BREACHED" : res === "LOSS" ? "ACCESS DENIED" : "STALEMATE";
+      updateScoreUI();
+      
+      setTimeout(() => {
+        document.getElementById("countdown").style.display = "none";
+        isGameRunning = false;
+        document.getElementById("bg").src = "public/bg2.png";
+      }, 2000);
+    }
+
+    // تشغيل MediaPipe
+    const hands = new Hands({locateFile: (f) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}`});
+    hands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0.8 });
+    hands.onResults(onResults);
+
+    new Camera(videoEl, { onFrame: async () => { await hands.send({image: videoEl}); }, width: 640, height: 480 }).start();
+  </script>
+</body>
+</html>

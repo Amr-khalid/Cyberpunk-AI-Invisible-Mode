@@ -1,0 +1,106 @@
+<mxfile host="app.diagrams.net" modified="2025-12-21T12:00:00.000Z" agent="Connect4Gen" version="22.1.0" type="device">
+  
+  <diagram id="UseCasePage" name="1. Use Case Diagram">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="u0" />
+        <mxCell id="u1" parent="u0" />
+
+        <mxCell id="sys_box" value="Connect 4 System" style="swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=none;strokeColor=#000000;fontStyle=1;fontSize=14;" vertex="1" parent="u1">
+          <mxGeometry x="280" y="80" width="440" height="420" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc_play" value="Drop Piece&#xa;(Make Move)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="sys_box">
+          <mxGeometry x="120" y="50" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc_valid" value="Check Valid Location" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="sys_box">
+          <mxGeometry x="40" y="160" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc_win" value="Check Win Condition" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="sys_box">
+          <mxGeometry x="250" y="160" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc_ai" value="Calculate Best Move&#xa;(Minimax)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="sys_box">
+          <mxGeometry x="120" y="270" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc_score" value="Evaluate Window/Board" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="sys_box">
+          <mxGeometry x="140" y="370" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="inc1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="sys_box" source="uc_play" target="uc_valid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=1;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="sys_box" source="uc_play" target="uc_win">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc3" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="sys_box" source="uc_ai" target="uc_score">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="act_p1" value="Human Player" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="u1">
+          <mxGeometry x="100" y="150" width="60" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_ai" value="AI Agent" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="u1">
+          <mxGeometry x="800" y="280" width="60" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lnk1" style="endArrow=none;html=1;entryX=0;entryY=0.5;" edge="1" parent="u1" source="act_p1" target="uc_play">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="lnk2" style="endArrow=none;html=1;entryX=1;entryY=0.5;" edge="1" parent="u1" source="act_ai" target="uc_play">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lnk3" style="endArrow=none;html=1;entryX=1;entryY=0.5;" edge="1" parent="u1" source="act_ai" target="uc_ai">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="ClassPage" name="2. Class Diagram">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="c0" />
+        <mxCell id="c1" parent="c0" />
+
+        <mxCell id="cls_main" value="Connect4Game (Script)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fontSize=14;" vertex="1" parent="c1">
+          <mxGeometry x="240" y="80" width="400" height="460" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_attr" value="+ ROW_COUNT: int = 6&#xa;+ COLUMN_COUNT: int = 7&#xa;+ PLAYER: int = 0&#xa;+ AI: int = 1&#xa;+ EMPTY: int = 0&#xa;+ PLAYER_PIECE: int = 1&#xa;+ AI_PIECE: int = 2&#xa;+ WINDOW_LENGTH: int = 4" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cls_main">
+          <mxGeometry y="26" width="400" height="134" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="cls_main">
+          <mxGeometry y="160" width="400" height="8" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cls_meth" value="+ create_board(): ndarray&#xa;+ drop_piece(board, row, col, piece): void&#xa;+ is_valid_location(board, col): bool&#xa;+ get_next_open_row(board, col): int&#xa;+ get_valid_locations(board): List[int]&#xa;+ winning_move(board, piece): bool&#xa;+ is_terminal_node(board): bool&#xa;&#xa;# AI / Heuristic Methods&#xa;+ evaluate_window(window, piece): int&#xa;+ score_position(board, piece): int&#xa;+ minimax(board, depth, alpha, beta, maxPlayer): Tuple" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="cls_main">
+          <mxGeometry y="168" width="400" height="292" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lib_np" value="numpy" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="c1">
+          <mxGeometry x="680" y="80" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="lib_math" value="math/random" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="c1">
+          <mxGeometry x="680" y="160" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel_np" value="imports" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=0;entryY=0.5;exitX=1;exitY=0.1;" edge="1" parent="c1" source="cls_main" target="lib_np">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_math" value="imports" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=0;entryY=0.5;exitX=1;exitY=0.25;" edge="1" parent="c1" source="cls_main" target="lib_math">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,375 @@
+<mxfile host="65bd71144e">
+    <diagram id="R_dIQZNOI_UGCtdEkroj" name="Use Case">
+        <mxGraphModel dx="3448" dy="1364" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="RPS Game API System" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="80" width="620" height="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Player" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="170" width="60" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="320" width="60" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Play Round&#xa;POST /play" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="150" width="240" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Get Stats&#xa;GET /" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="250" width="240" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="Reset Stats&#xa;POST/GET /reset" style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="350" width="240" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Input: move (0..2) + user/session id&#xa;Output: ai_move + result + mode + stats" style="shape=note;whiteSpace=wrap;html=1;size=16;" vertex="1" parent="1">
+                    <mxGeometry x="690" y="140" width="260" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" style="endArrow=none;html=1;strokeWidth=2;" edge="1" parent="1" source="3" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="endArrow=none;html=1;strokeWidth=2;" edge="1" parent="1" source="3" target="6">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" style="endArrow=none;html=1;strokeWidth=2;" edge="1" parent="1" source="4" target="7">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="endArrow=none;html=1;strokeWidth=2;" edge="1" parent="1" source="4" target="6">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" style="dashed=1;endArrow=open;html=1;" edge="1" parent="1" source="5" target="8">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&#xa;  &#xa;  &#xa;    &#xa;      &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;      &#xa;    &#xa;  &#xa;&#xa;  &#xa;    &#xa;      &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;      &#xa;    &#xa;  &#xa;&#xa;  &#xa;    &#xa;      &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;      &#xa;    &#xa;  &#xa;&#xa;  &#xa;    &#xa;      &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;      &#xa;    &#xa;  &#xa;&#xa;  &#xa;    &#xa;      &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;      &#xa;    &#xa;  &#xa;&#xa;  &#xa;    &#xa;      &#xa;        &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;            &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;      &#xa;    &#xa;  &#xa;&#xa;  &#xa;    &#xa;      &#xa;        &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;          &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;        &#xa;      &#xa;    &#xa;  &#xa;&#xa;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry width="30" height="4860" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="Class Diagram" compressed="false" id="Atf9w2C1wLNwXsOO79Wv">
+        <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <!-- Controller -->
+                <mxCell id="cls_controller" value="GameController&#xa;----------------&#xa;+ POST_play(req): json&#xa;+ GET_stats(req): json&#xa;+ POST_reset(req): json" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=0;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="80" width="300" height="140" as="geometry"/>
+                </mxCell>
+                <!-- Service -->
+                <mxCell id="cls_service" value="GameService&#xa;----------------&#xa;- store: StateStore&#xa;- predictor: Predictor&#xa;----------------&#xa;+ play(userId, userMove): PlayResponse&#xa;+ getStats(userId): Stats&#xa;+ reset(userId): void" style="shape=rectangle;whiteSpace=wrap;html=1;rounded=0;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="80" width="360" height="180" as="geometry"/>
+                </mxCell>
+                <!-- Interfaces -->
+                <mxCell id="iface_store" value="&lt;&lt;interface&gt;&gt;&#xa;StateStore&#xa;----------------&#xa;+ load(userId): GameState&#xa;+ save(state): void&#xa;+ reset(userId): void" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="840" y="60" width="320" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="iface_pred" value="&lt;&lt;interface&gt;&gt;&#xa;Predictor&#xa;----------------&#xa;+ chooseAiMove(state, userMove): Move" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="840" y="260" width="320" height="110" as="geometry"/>
+                </mxCell>
+                <!-- Domain -->
+                <mxCell id="cls_state" value="GameState&#xa;----------------&#xa;+ userId: string&#xa;+ lastMove: Move&#xa;+ stats: Stats&#xa;+ history: List&lt;Move&gt;" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="300" width="320" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_stats" value="Stats&#xa;----------------&#xa;+ wins: int&#xa;+ losses: int&#xa;+ ties: int&#xa;----------------&#xa;+ update(userMove, aiMove): Result" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="470" width="320" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_response" value="PlayResponse&#xa;----------------&#xa;+ userMove: Move&#xa;+ aiMove: Move&#xa;+ result: Result&#xa;+ mode: string&#xa;+ stats: Stats" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="300" width="300" height="160" as="geometry"/>
+                </mxCell>
+                <!-- Enums -->
+                <mxCell id="enm_move" value="&lt;&lt;enum&gt;&gt;&#xa;Move&#xa;----------------&#xa;ROCK=0&#xa;PAPER=1&#xa;SCISSORS=2" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="500" width="220" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="enm_result" value="&lt;&lt;enum&gt;&gt;&#xa;Result&#xa;----------------&#xa;WIN&#xa;LOSS&#xa;TIE" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="500" width="220" height="140" as="geometry"/>
+                </mxCell>
+                <!-- Implementations -->
+                <mxCell id="impl_redis" value="RedisStateStore" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="1200" y="70" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="impl_pg" value="PostgresStateStore" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="1200" y="150" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="impl_random" value="RandomPredictor" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="1200" y="260" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="impl_markov" value="MarkovPredictor" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="1200" y="340" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="impl_tree" value="DecisionTreePredictor" style="shape=rectangle;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+                    <mxGeometry x="1200" y="420" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <!-- Relationships -->
+                <mxCell id="r1" style="endArrow=open;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_controller" target="cls_service">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r2" style="endArrow=open;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_service" target="iface_store">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r3" style="endArrow=open;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_service" target="iface_pred">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r4" style="endArrow=diamond;endFill=1;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_state" target="cls_stats">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r5" style="endArrow=open;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_service" target="cls_state">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r6" style="endArrow=open;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_service" target="cls_response">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r7" style="dashed=1;endArrow=block;endFill=0;html=1;strokeWidth=2;" edge="1" parent="1" source="impl_redis" target="iface_store">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r8" style="dashed=1;endArrow=block;endFill=0;html=1;strokeWidth=2;" edge="1" parent="1" source="impl_pg" target="iface_store">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r9" style="dashed=1;endArrow=block;endFill=0;html=1;strokeWidth=2;" edge="1" parent="1" source="impl_random" target="iface_pred">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r10" style="dashed=1;endArrow=block;endFill=0;html=1;strokeWidth=2;" edge="1" parent="1" source="impl_markov" target="iface_pred">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r11" style="dashed=1;endArrow=block;endFill=0;html=1;strokeWidth=2;" edge="1" parent="1" source="impl_tree" target="iface_pred">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r12" style="endArrow=open;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_stats" target="enm_result">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r13" style="endArrow=open;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_state" target="enm_move">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r14" style="endArrow=open;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_response" target="enm_move">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="r15" style="endArrow=open;html=1;strokeWidth=2;" edge="1" parent="1" source="cls_response" target="enm_result">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="1. Activity Diagram (Logic)" id="HFKRgOQpIOhrtPAso9lX">
+        <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="start" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+                    <mxGeometry x="385" y="40" width="30" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="start" target="input">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="input" value="User Input&#xa;(Rock/Paper/Scissors)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="100" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="load" value="Load data.json" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="180" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="input" target="load">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="decision" value="History &gt; 5?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="270" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="load" target="decision">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="random" value="Generate Random Move" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="380" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="edgeNo" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="decision" target="random">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="train" value="Train Decision Tree&#xa;&amp; Predict Move" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+                    <mxGeometry x="480" y="380" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="edgeYes" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="decision" target="train">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="calc" value="Compare Moves&#xa;(Determine Win/Loss/Tie)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="500" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="random" target="calc">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=1;entryY=0.5;" edge="1" parent="1" source="train" target="calc">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="save" value="Update Stats &amp;&#xa;Save to JSON" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+                    <mxGeometry x="350" y="600" width="100" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="calc" target="save">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="end" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+                    <mxGeometry x="385" y="720" width="30" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="save" target="end">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="2. Sequence Diagram (Flow)" id="JUnNsvSZ-LLTBXeHeQer">
+        <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="rootSq"/>
+                <mxCell id="layerSq" parent="rootSq"/>
+                <mxCell id="user" value="User" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;" vertex="1" parent="layerSq">
+                    <mxGeometry x="80" y="80" width="20" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="flask" value="Flask App&#xa;(/play)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="layerSq">
+                    <mxGeometry x="240" y="80" width="100" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="json" value="data.json" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="layerSq">
+                    <mxGeometry x="440" y="80" width="100" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="ai" value="AI Model&#xa;(Sklearn)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="layerSq">
+                    <mxGeometry x="640" y="80" width="100" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="msg1" value="POST {move: 0}" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="layerSq" source="user" target="flask">
+                    <mxGeometry width="80" relative="1" as="geometry">
+                        <mxPoint x="100" y="160" as="sourcePoint"/>
+                        <mxPoint x="230" y="160" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="170" y="160"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="msg2" value="getData()" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="layerSq" source="flask" target="json">
+                    <mxGeometry width="80" relative="1" as="geometry">
+                        <mxPoint x="290" y="190" as="sourcePoint"/>
+                        <mxPoint x="430" y="190" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="360" y="190"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="msg3" value="return stats &amp; history" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;" edge="1" parent="layerSq" source="json" target="flask">
+                    <mxGeometry width="80" relative="1" as="geometry">
+                        <mxPoint x="440" y="220" as="sourcePoint"/>
+                        <mxPoint x="290" y="220" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="370" y="220"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="alt1" value="if rounds &gt; 5" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="layerSq">
+                    <mxGeometry x="200" y="250" width="500" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="msg4" value="fit(history) &amp; predict()" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="layerSq" source="flask" target="ai">
+                    <mxGeometry width="80" relative="1" as="geometry">
+                        <mxPoint x="290" y="290" as="sourcePoint"/>
+                        <mxPoint x="630" y="290" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="460" y="290"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="msg5" value="return predicted_move" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;" edge="1" parent="layerSq" source="ai" target="flask">
+                    <mxGeometry width="80" relative="1" as="geometry">
+                        <mxPoint x="630" y="330" as="sourcePoint"/>
+                        <mxPoint x="290" y="330" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="460" y="330"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="msg6" value="save(new_data)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;" edge="1" parent="layerSq" source="flask" target="json">
+                    <mxGeometry width="80" relative="1" as="geometry">
+                        <mxPoint x="290" y="420" as="sourcePoint"/>
+                        <mxPoint x="430" y="420" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="360" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="msg7" value="response {result, ai_move}" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;" edge="1" parent="layerSq" source="flask" target="user">
+                    <mxGeometry width="80" relative="1" as="geometry">
+                        <mxPoint x="290" y="460" as="sourcePoint"/>
+                        <mxPoint x="90" y="460" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="190" y="460"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="3. Class Diagram (Structure)" id="iLKKJYQID1qJMI5IywTY">
+        <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="rootCl"/>
+                <mxCell id="layerCl" parent="rootCl"/>
+                <mxCell id="class1" value="FlaskApp" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" vertex="1" parent="layerCl">
+                    <mxGeometry x="140" y="120" width="200" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="attr1" value="+ url: String = &quot;data.json&quot;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="class1">
+                    <mxGeometry y="26" width="200" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="sep1" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="class1">
+                    <mxGeometry y="52" width="200" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="meth1" value="+ play(): JSON&#xa;+ reset(): JSON&#xa;+ getData(): Dict" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="class1">
+                    <mxGeometry y="60" width="200" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="class2" value="AI_Model" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="layerCl">
+                    <mxGeometry x="500" y="120" width="220" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="meth2" value="+ fit(X, y)&#xa;+ predict(lastMove)&#xa;+ DecisionTreeClassifier()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="class2">
+                    <mxGeometry y="26" width="220" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="class3" value="DataStructure" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="layerCl">
+                    <mxGeometry x="320" y="320" width="200" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="attr3" value="+ stats: Dict&#xa;+ userSteps: List&#xa;+ aiSteps: List&#xa;+ lastMove: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="class3">
+                    <mxGeometry y="26" width="200" height="84" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel1" value="Uses" style="endArrow=open;html=1;dashed=1;entryX=0;entryY=0.5;exitX=1;exitY=0.5;" edge="1" parent="layerCl" source="class1" target="class2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel2" value="Reads/Writes" style="endArrow=diamond;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="layerCl" source="class1" target="class3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="4. Use Case Diagram" id="0bRjJ03Rk6eCU2PWiCRY">
+        <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="rootUc"/>
+                <mxCell id="layerUc" parent="rootUc"/>
+                <mxCell id="actor" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="layerUc">
+                    <mxGeometry x="100" y="200" width="40" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="system" value="Rock-Paper-Scissors System" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="layerUc">
+                    <mxGeometry x="250" y="100" width="400" height="350" as="geometry"/>
+                </mxCell>
+                <mxCell id="uc1" value="Play Round" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="system">
+                    <mxGeometry x="50" y="40" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="uc2" value="Reset Game" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+                    <mxGeometry x="50" y="140" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="uc3" value="View Stats" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="system">
+                    <mxGeometry x="50" y="240" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="uc4" value="Predict Move&#xa;(AI)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="system">
+                    <mxGeometry x="240" y="80" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="include" value="&lt;&lt;include&gt;&gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="system" source="uc1" target="uc4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="assoc1" style="endArrow=none;html=1;entryX=0;entryY=0.5;" edge="1" parent="layerUc" source="actor" target="uc1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="assoc2" style="endArrow=none;html=1;entryX=0;entryY=0.5;" edge="1" parent="layerUc" source="actor" target="uc2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="assoc3" style="endArrow=none;html=1;entryX=0;entryY=0.5;" edge="1" parent="layerUc" source="actor" target="uc3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

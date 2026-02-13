@@ -1,0 +1,6 @@
+FROM node:18-alpine
+RUN npm install -g serve
+WORKDIR /app
+COPY . .
+# البورت 7860 مناسب لمنصة Hugging Face
+CMD ["serve", "-s", ".", "-l", "7860"]

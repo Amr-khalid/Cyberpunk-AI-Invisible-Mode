@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon AI Rock Paper Scissors</title>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+  
+  <style>
+    /* --- Cyberpunk/Neon CSS Styles --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      overflow: hidden; 
+      background-color: #111; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      color: white;
+    }
+
+    /* Scoreboard Styling */
+    .score-container {
+      display: flex; justify-content: center; width: 100%; position: fixed; top: 20px; z-index: 10;
+    }
+    .score-box {
+      height: 50px; width: 140px;
+      backdrop-filter: blur(15px);
+      font-weight: 800; font-size: 1.2rem;
+      border: none; outline: none; text-align: center; color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+    .humans {
+      background: linear-gradient(to right, rgba(0, 242, 255, 0.3), rgba(0, 0, 0, 0.5));
+      border-radius: 30px 0 0 30px;
+      border-right: 2px solid rgba(0, 242, 255, 0.5);
+      box-shadow: -5px 5px 15px rgba(0, 242, 255, 0.2);
+    }
+    .ais {
+      background: linear-gradient(to left, rgba(255, 0, 85, 0.3), rgba(0, 0, 0, 0.5));
+      border-radius: 0 30px 30px 0;
+      border-left: 2px solid rgba(255, 0, 85, 0.5);
+      box-shadow: 5px 5px 15px rgba(255, 0, 85, 0.2);
+    }
+
+    /* Main Game Area */
+    .game-container {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;
+    }
+    .hands-box { display: flex; justify-content: space-around; width: 95vw; align-items: center; }
+    /* تكبير حجم الأيدي */
+    img.hand-img { 
+      width: 50vw; max-width: 500px; height: auto; 
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));
+    }
+    .ai-hand-container img { animation: float 4s ease-in-out infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 20px rgba(255, 0, 85, 0.4)); }
+      50% { transform: translateY(-15px); filter: drop-shadow(0 0 40px rgba(255, 0, 85, 0.7)); }
+    }
+    
+    /* Animations used in JS */
+    .shake { animation: shakeAnim 0.5s infinite; }
+    @keyframes shakeAnim {
+      0% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-30px) rotate(-5deg); }
+      50% { transform: translateY(0) rotate(0deg); }
+      75% { transform: translateY(-30px) rotate(5deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    /* Controls & Camera */
+    .controls { margin-top: 40px; z-index: 20; display: flex; gap: 20px; }
+    button.control-btn {
+      font-size: 3rem; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%; width: 80px; height: 80px; cursor: pointer; transition: 0.3s;
+      backdrop-filter: blur(5px);
+    }
+    button.control-btn:hover { transform: scale(1.1) rotate(10deg); background: rgba(255, 255, 255, 0.2); border-color: #00f2ff; box-shadow: 0 0 20px #00f2ff; }
+
+    /* إخفاء الكانفاس الخاص بالكاميرا */
+    #output {
+      display: none;
+    }
+
+    /* Overlays */
+    #countdown {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-size: 150px; font-weight: 900; color: #fff;
+      text-shadow: 0 0 50px #00f2ff, 0 0 20px #00f2ff;
+      display: none; z-index: 999; pointer-events: none;
+    }
+    #bg { position: fixed; top:0; left:0; width: 100%; height: 100%; z-index: -1; object-fit: cover; transition: opacity 0.5s; }
+    #resetBtn {
+      position: fixed; top: 20px; left: 20px; padding: 10px 20px;
+      background: rgba(255,0,0,0.2); border: 1px solid rgba(255,0,0,0.5); color: #ffcccb;
+      cursor: pointer; z-index: 555; font-weight: bold; letter-spacing: 1px;
+      transition: 0.3s;
+    }
+    #resetBtn:hover { background: rgba(255,0,0,0.5); box-shadow: 0 0 15px red; }
+  </style>
+</head>
+<body>
+  <video id="video" autoplay playsinline style="display: none;"></video>
+  
+  <canvas id="output" width="640" height="480"></canvas>
+
+  <div id="countdown"></div>
+  <button id="resetBtn">RESET SYSTEM</button>
+  <img src="public/bg2.png" id="bg" alt="Background" />
+
+  <div class="score-container">
+    <input type="text" readonly id="humanScore" value="HUMAN: 0" class="score-box humans" />
+    <input type="text" readonly id="aiScore" value="AI: 0" class="score-box ais" />
+  </div>
+
+  <div class="game-container">
+    <div class="hands-box">
+      <div class="human-hand-container"><img src="public/rh.png" id="humanHand" class="hand-img" /></div>
+      <div class="ai-hand-container"><img src="public/rr.png" id="aiHand" class="hand-img" /></div>
+    </div>
+    <div class="controls">
+      <button id="rockBtn" class="control-btn">👊</button>
+      <button id="paperBtn" class="control-btn">✋</button>
+      <button id="scissorsBtn" class="control-btn">✌️</button>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // 1. إعدادات المتغيرات والنظام
+    // ==========================================
+    const moveMap = ["rock", "paper", "scissors"];
+    const assets = {
+      rock: { human: "public/rh.png", ai: "public/rr.png" },
+      paper: { human: "public/ph.png", ai: "public/pr.png" },
+      scissors: { human: "public/sh.png", ai: "public/sr.png" }
+    };
+    
+    let isGameRunning = false;
+    let stats = JSON.parse(localStorage.getItem('neon_rps_stats')) || { wins: 0, losses: 0 };
+
+    // عناصر DOM
+    const humanHandImg = document.getElementById("humanHand");
+    const aiHandImg = document.getElementById("aiHand");
+    const countdownEl = document.getElementById("countdown");
+    const bgImg = document.getElementById("bg");
+
+    // تحديث السكور عند التحميل
+    function updateScoreUI() {
+      document.getElementById("humanScore").value = `HUMAN: ${stats.wins}`;
+      document.getElementById("aiScore").value = `AI: ${stats.losses}`;
+      localStorage.setItem('neon_rps_stats', JSON.stringify(stats));
+    }
+    updateScoreUI();
+
+    // ==========================================
+    // 2. منطق اللعبة الأساسي (بديل البايثون)
+    // ==========================================
+    function determineWinner(h, a) {
+      if (h === a) return "draw";
+      if ((h === "rock" && a === "scissors") || 
+          (h === "paper" && a === "rock") || 
+          (h === "scissors" && a === "paper")) return "win";
+      return "loss";
+    }
+
+    function finishRound(humanMove, aiMove) {
+      // تحديث الصور النهائية
+      humanHandImg.src = assets[humanMove].human;
+      aiHandImg.src = assets[aiMove].ai;
+      
+      // إزالة أنيميشن الهز
+      humanHandImg.classList.remove("shake");
+      aiHandImg.classList.remove("shake");
+
+      // تحديد الفائز وتحديث النتيجة والخلفية
+      const result = determineWinner(humanMove, aiMove);
+      let resultText = "";
+      
+      if (result === "win") {
+        stats.wins++;
+        resultText = "SYSTEM BREACHED! YOU WIN";
+        bgImg.src = "public/bgh.png";
+        countdownEl.style.textShadow = "0 0 50px #00f2ff, 0 0 20px #00f2ff";
+      } else if (result === "loss") {
+        stats.losses++;
+        resultText = "SYSTEM FAILURE! YOU LOSE";
+        bgImg.src = "public/bgr.png";
+        countdownEl.style.textShadow = "0 0 50px #ff0055, 0 0 20px #ff0055";
+      } else {
+        resultText = "STALEMATE Detected";
+        bgImg.src = "public/bg2.png";
+        countdownEl.style.textShadow = "0 0 50px #ffffff, 0 0 20px #ffffff";
+      }
+
+      updateScoreUI();
+      
+      // عرض النتيجة النهائية
+      countdownEl.innerText = resultText;
+      countdownEl.style.fontSize = "60px";
+      setTimeout(() => {
+        countdownEl.style.display = "none";
+        isGameRunning = false; // السماح بجولة جديدة
+        // إعادة الصور لوضع الاستعداد
+        setTimeout(() => {
+             bgImg.src = "public/bg2.png";
+             humanHandImg.src = assets['rock'].human;
+             aiHandImg.src = assets['rock'].ai;
+        }, 1500);
+      }, 2000);
+    }
+
+    function startGameSequence(detectedMove) {
+      if (isGameRunning) return;
+      isGameRunning = true;
+
+      // تحضير الصور للأنيميشن (وضع الحجر)
+      humanHandImg.src = assets['rock'].human;
+      aiHandImg.src = assets['rock'].ai;
+      
+      let count = 3;
+      countdownEl.style.display = "block";
+      countdownEl.style.fontSize = "150px";
+      countdownEl.innerText = count;
+
+      const timer = setInterval(() => {
+        // إضافة تأثير الهز أثناء العد
+        humanHandImg.classList.add("shake");
+        aiHandImg.classList.add("shake");
+        
+        count--;
+        if (count > 0) {
+          countdownEl.innerText = count;
+        } else {
+          clearInterval(timer);
+          // اختيار حركة الـ AI وإنهاء الجولة
+          const aiMove = moveMap[Math.floor(Math.random() * 3)];
+          finishRound(detectedMove, aiMove);
+        }
+      }, 800);
+    }
+
+    // ==========================================
+    // 3. إعدادات الكاميرا والذكاء الاصطناعي (MediaPipe)
+    // ==========================================
+    const videoElement = document.getElementById("video");
+    const canvasElement = document.getElementById("output");
+    const canvasCtx = canvasElement.getContext("2d");
+
+    // متغيرات لضمان استقرار الحركة المكتشفة
+    let lastDetectedMove = null;
+    let stableFrameCount = 0;
+    const STABILITY_THRESHOLD = 10; // عدد الفريمات المطلوبة لتأكيد الحركة
+
+    // دالة بسيطة لتحويل معالم اليد إلى (حجر/ورقة/مقص)
+    function detectGesture(landmarks) {
+      // النقاط التي تمثل رؤوس الأصابع (السبابة، الوسطى، البنصر، الخنصر)
+      const fingerTips = [8, 12, 16, 20];
+      // المفاصل الوسطى المقابلة
+      const fingerCIPs = [6, 10, 14, 18];
+      
+      let fingersExtended = 0;
+      // اعتبار الإبهام مفروداً إذا كان بعيداً عن راحة اليد أفقياً
+      if (landmarks[4].x > landmarks[3].x + 0.02) fingersExtended++;
+
+      // فحص باقي الأصابع الأربعة
+      for (let i = 0; i < 4; i++) {
+        // إذا كان رأس الإصبع أعلى من مفصله الأوسط (على محور Y، القيم الأقل هي الأعلى في الشاشة)
+        if (landmarks[fingerTips[i]].y < landmarks[fingerCIPs[i]].y) {
+          fingersExtended++;
+        }
+      }
+
+      // القواعد:
+      if (fingersExtended <= 1) return "rock";       // قبضة
+      if (fingersExtended >= 4) return "paper";      // كف مفتوح
+      if (fingersExtended === 2 || fingersExtended === 3 ) return "scissors"; // إصبعين أو ثلاثة (للتقريب)
+      
+      return null;
+    }
+
+    function onResults(results) {
+      // لا حاجة للرسم على الكانفاس لأنه مخفي، ولكن منطق الاكتشاف سيظل يعمل
+      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        const landmarks = results.multiHandLandmarks[0];
+        
+        // محاولة اكتشاف الحركة
+        const currentMove = detectGesture(landmarks);
+
+        // منطق الاستقرار (Stability Check)
+        if (currentMove && currentMove === lastDetectedMove) {
+          stableFrameCount++;
+        } else {
+          lastDetectedMove = currentMove;
+          stableFrameCount = 0;
+        }
+
+        // إذا كانت الحركة مستقرة واللعبة لا تعمل، ابدأ اللعبة
+        if (stableFrameCount > STABILITY_THRESHOLD && !isGameRunning && currentMove) {
+          startGameSequence(currentMove);
+          stableFrameCount = 0; // إعادة تصفير العداد
+        }
+      }
+    }
+
+    // تهيئة MediaPipe Hands
+    const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
+    hands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0.7, minTrackingConfidence: 0.6 });
+    hands.onResults(onResults);
+
+    // تشغيل الكاميرا
+    const camera = new Camera(videoElement, {
+      onFrame: async () => { await hands.send({image: videoElement}); },
+      width: 640, height: 480
+    });
+    camera.start().catch(e => alert("Camera Error: Please allow camera access and ensure you're on HTTPS or localhost."));
+
+    // ==========================================
+    // 4. ربط الأزرار (التحكم اليدوي والريست)
+    // ==========================================
+    document.getElementById("rockBtn").onclick = () => startGameSequence("rock");
+    document.getElementById("paperBtn").onclick = () => startGameSequence("paper");
+    document.getElementById("scissorsBtn").onclick = () => startGameSequence("scissors");
+    document.getElementById("resetBtn").onclick = () => {
+      stats = { wins: 0, losses: 0 };
+      updateScoreUI();
+      bgImg.src = "public/bg2.png";
+    };
+  </script>
+</body>
+</html>

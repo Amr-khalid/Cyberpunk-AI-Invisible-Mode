@@ -1,0 +1,385 @@
+<mxfile host="65bd71144e">
+    <diagram id="UseCase" name="1. Use Case Diagram">
+        <mxGraphModel dx="1437" dy="568" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="u0"/>
+                <mxCell id="u1" parent="u0"/>
+                <mxCell id="0" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="u1" source="u_sys">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="699.666666666667" y="630" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="u_sys" value="Rock-Paper-Scissors AI System" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fontSize=16;fontStyle=1" parent="u1" vertex="1">
+                    <mxGeometry x="410" y="100" width="590" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_play" value="Play Round (POST /play)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" parent="u_sys" vertex="1">
+                    <mxGeometry x="180" y="80" width="240" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_reset" value="Reset Game (GET /reset)" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" parent="u_sys" vertex="1">
+                    <mxGeometry x="180" y="380" width="240" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_stats" value="View Stats (GET /)" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" parent="u_sys" vertex="1">
+                    <mxGeometry x="180" y="260" width="240" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_predict" value="Predict Move&#xa;(AI Strategy)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="u_sys" vertex="1">
+                    <mxGeometry x="400" y="150" width="160" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_save" value="Save History" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" parent="u_sys" vertex="1">
+                    <mxGeometry x="40" y="180" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_inc1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=12;" parent="u_sys" source="u_play" target="u_predict" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_inc2" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=1;entryX=0.5;entryY=0;fontSize=12;" parent="u_sys" source="u_play" target="u_save" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_actor" value="Player" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=16;" parent="u1" vertex="1">
+                    <mxGeometry x="150" y="250" width="90" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_conn1" style="endArrow=none;html=1;entryX=0;entryY=0.5;strokeWidth=2;" parent="u1" source="u_actor" target="u_play" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_conn2" style="endArrow=none;html=1;entryX=0;entryY=0.5;strokeWidth=2;" parent="u1" source="u_actor" target="u_stats" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="u_conn3" style="endArrow=none;html=1;entryX=0;entryY=0.5;strokeWidth=2;" parent="u1" source="u_actor" target="u_reset" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="1" value="User Case" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="u1">
+                    <mxGeometry x="560" y="38" width="80" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="Activity" name="2. Activity Diagram">
+        <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="a0"/>
+                <mxCell id="a1" parent="a0"/>
+                <mxCell id="a_start" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="a1">
+                    <mxGeometry x="480" y="40" width="50" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_input" value="Receive User Move" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="a1">
+                    <mxGeometry x="405" y="130" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_load" value="Load Data (JSON)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="a1">
+                    <mxGeometry x="405" y="230" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_dec" value="History &amp;gt; 5?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="a1">
+                    <mxGeometry x="430" y="330" width="150" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_rand" value="Generate Random Move" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="a1">
+                    <mxGeometry x="200" y="480" width="200" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_train" value="Train Decision Tree" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" vertex="1" parent="a1">
+                    <mxGeometry x="600" y="480" width="200" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_pred" value="Predict Next User Move" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="a1">
+                    <mxGeometry x="600" y="590" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_count" value="Choose Counter Move" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="a1">
+                    <mxGeometry x="600" y="690" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_comp" value="Compare Moves &amp;amp;&#xa;Determine Winner" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="a1">
+                    <mxGeometry x="405" y="800" width="200" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_save" value="Save JSON &amp;amp; Return" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="a1">
+                    <mxGeometry x="405" y="910" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_end" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="a1">
+                    <mxGeometry x="480" y="1010" width="50" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="ac1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;" edge="1" parent="a1" source="a_start" target="a_input">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ac2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;" edge="1" parent="a1" source="a_input" target="a_load">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ac3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;" edge="1" parent="a1" source="a_load" target="a_dec">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ac4" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;fontSize=14;" edge="1" parent="a1" source="a_dec" target="a_rand">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="430" y="380" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="300" y="380"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ac5" value="Yes" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;fontSize=14;" edge="1" parent="a1" source="a_dec" target="a_train">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="580" y="380" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="700" y="380"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ac6" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;" edge="1" parent="a1" source="a_train" target="a_pred">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ac7" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;" edge="1" parent="a1" source="a_pred" target="a_count">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ac8" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;strokeWidth=2;" edge="1" parent="a1" source="a_rand" target="a_comp">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="300" y="835"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ac9" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;strokeWidth=2;" edge="1" parent="a1" source="a_count" target="a_comp">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="700" y="835"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ac10" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;" edge="1" parent="a1" source="a_comp" target="a_save">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ac11" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeWidth=2;" edge="1" parent="a1" source="a_save" target="a_end">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="Statechart" name="3. Statechart Diagram">
+        <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="s0"/>
+                <mxCell id="s1" parent="s0"/>
+                <mxCell id="s_start" value="" style="ellipse;fillColor=#000000;strokeColor=none;" vertex="1" parent="s1">
+                    <mxGeometry x="80" y="120" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_idle" value="Idle State&#xa;(Waiting for Request)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontStyle=1;fontSize=14;" vertex="1" parent="s1">
+                    <mxGeometry x="200" y="100" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_proc" value="Processing Move" style="swimlane;whiteSpace=wrap;html=1;rounded=1;arcSize=20;startSize=40;fontSize=16;fontStyle=1" vertex="1" parent="s1">
+                    <mxGeometry x="150" y="280" width="650" height="350" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_p_start" value="" style="ellipse;fillColor=#000000;" vertex="1" parent="s_proc">
+                    <mxGeometry x="315" y="60" width="30" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_rand" value="Data Collection&#xa;(Random Logic)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="s_proc">
+                    <mxGeometry x="60" y="140" width="180" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_ai" value="AI Learning&#xa;(Decision Tree)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;fontSize=14;" vertex="1" parent="s_proc">
+                    <mxGeometry x="400" y="140" width="180" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_calc" value="Result Calculation" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="s_proc">
+                    <mxGeometry x="240" y="250" width="180" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="st1" value="[History &amp;lt;= 5]" style="html=1;edgeStyle=orthogonalEdgeStyle;fontSize=12;" edge="1" parent="s_proc" source="s_p_start" target="s_rand">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="st2" value="[History &amp;gt; 5]" style="html=1;edgeStyle=orthogonalEdgeStyle;fontSize=12;" edge="1" parent="s_proc" source="s_p_start" target="s_ai">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="st3" style="html=1;entryX=0;entryY=0.5;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="s_proc" source="s_rand" target="s_calc">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="st4" style="html=1;entryX=1;entryY=0.5;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="s_proc" source="s_ai" target="s_calc">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_save" value="Saving State" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontSize=14;" vertex="1" parent="s1">
+                    <mxGeometry x="600" y="100" width="180" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="tr1" value="Start App" style="html=1;strokeWidth=2;fontSize=12;" edge="1" parent="s1" source="s_start" target="s_idle">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="tr2" value="POST /play" style="html=1;strokeWidth=2;fontSize=12;" edge="1" parent="s1" source="s_idle" target="s_proc">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="tr3" value="Response Ready" style="html=1;strokeWidth=2;fontSize=12;" edge="1" parent="s1" source="s_proc" target="s_save">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="475" y="280" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="tr4" value="Done" style="html=1;strokeWidth=2;fontSize=12;" edge="1" parent="s1" source="s_save" target="s_idle">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="Class" name="4. Class Diagram">
+        <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="c0"/>
+                <mxCell id="c1" parent="c0"/>
+                <mxCell id="c_flask" value="app (Flask)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fontSize=16;" vertex="1" parent="c1">
+                    <mxGeometry x="100" y="100" width="300" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_attr1" value="+ url: str = &quot;data.json&quot;&#xa;+ option: dict = {0:rock...}" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="c_flask">
+                    <mxGeometry y="30" width="300" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_sep1" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="c_flask">
+                    <mxGeometry y="90" width="300" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_meth1" value="+ play(): json&#xa;+ reset(): json&#xa;+ index(): json&#xa;- getData(): dict&#xa;- save(data): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="c_flask">
+                    <mxGeometry y="98" width="300" height="102" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_sk" value="sklearn.tree" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;" vertex="1" parent="c1">
+                    <mxGeometry x="550" y="100" width="280" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_meth2" value="DecisionTreeClassifier" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontStyle=1;fontSize=14;" vertex="1" parent="c_sk">
+                    <mxGeometry y="30" width="280" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_meth3" value="+ fit(X, y)&#xa;+ predict(val)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="c_sk">
+                    <mxGeometry y="70" width="280" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_data" value="DataStructure (JSON)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=16;" vertex="1" parent="c1">
+                    <mxGeometry x="325" y="400" width="280" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_attr2" value="+ stats: {wins, losses, ties}&#xa;+ userSteps: List[int]&#xa;+ aiSteps: List[int]&#xa;+ lastMove: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="c_data">
+                    <mxGeometry y="30" width="280" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr1" value="Uses" style="endArrow=open;html=1;dashed=1;entryX=0;entryY=0.5;exitX=1;exitY=0.5;strokeWidth=2;fontSize=12;" edge="1" parent="c1" source="c_flask" target="c_sk">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="cr2" value="Reads/Writes" style="endArrow=diamond;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;fontSize=12;" edge="1" parent="c1" source="c_flask" target="c_data">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="Sequence" name="5. Sequence Diagram">
+        <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="sq0"/>
+                <mxCell id="sq1" parent="sq0"/>
+                <mxCell id="sq_user" value="User" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fontSize=14;" vertex="1" parent="sq1">
+                    <mxGeometry x="100" y="80" width="40" height="650" as="geometry"/>
+                </mxCell>
+                <mxCell id="sq_app" value="Flask API&#xa;(/play)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fillColor=#dae8fc;fontSize=14;" vertex="1" parent="sq1">
+                    <mxGeometry x="300" y="80" width="120" height="650" as="geometry"/>
+                </mxCell>
+                <mxCell id="sq_json" value="data.json" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fillColor=#f5f5f5;fontSize=14;" vertex="1" parent="sq1">
+                    <mxGeometry x="550" y="80" width="120" height="650" as="geometry"/>
+                </mxCell>
+                <mxCell id="sq_ai" value="AI Model&#xa;(Sklearn)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fillColor=#d5e8d4;fontSize=14;" vertex="1" parent="sq1">
+                    <mxGeometry x="800" y="80" width="120" height="650" as="geometry"/>
+                </mxCell>
+                <mxCell id="m1" value="POST {move:1}" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="sq1" source="sq_user" target="sq_app">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="120" y="180" as="sourcePoint"/>
+                        <mxPoint x="360" y="180" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m2" value="getData()" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="sq1" source="sq_app" target="sq_json">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="220" as="sourcePoint"/>
+                        <mxPoint x="610" y="220" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m3" value="return history" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;strokeWidth=2;fontSize=12;" edge="1" parent="sq1" source="sq_json" target="sq_app">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="610" y="260" as="sourcePoint"/>
+                        <mxPoint x="360" y="260" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="alt_frame" value="alt [Rounds &amp;gt; 5]" style="shape=umlFrame;whiteSpace=wrap;html=1;width=120;height=30;fontSize=14;" vertex="1" parent="sq1">
+                    <mxGeometry x="220" y="300" width="700" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="m4" value="fit(steps) &amp;amp; predict()" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="sq1" source="sq_app" target="sq_ai">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="360" as="sourcePoint"/>
+                        <mxPoint x="860" y="360" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m5" value="return prediction" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;strokeWidth=2;fontSize=12;" edge="1" parent="sq1" source="sq_ai" target="sq_app">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="860" y="420" as="sourcePoint"/>
+                        <mxPoint x="360" y="420" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m6" value="save(updated_stats)" style="html=1;verticalAlign=bottom;endArrow=block;strokeWidth=2;fontSize=12;" edge="1" parent="sq1" source="sq_app" target="sq_json">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="550" as="sourcePoint"/>
+                        <mxPoint x="610" y="550" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="m7" value="return JSON" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;strokeWidth=2;fontSize=12;" edge="1" parent="sq1" source="sq_app" target="sq_user">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="600" as="sourcePoint"/>
+                        <mxPoint x="120" y="600" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="Component" name="6. Component Diagram">
+        <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="cp0"/>
+                <mxCell id="cp1" parent="cp0"/>
+                <mxCell id="cp_client" value="Client&#xa;(Browser/Postman)" style="component;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="cp1">
+                    <mxGeometry x="100" y="200" width="200" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="cp_server" value="Flask Server" style="component;whiteSpace=wrap;html=1;fillColor=#dae8fc;fontSize=16;" vertex="1" parent="cp1">
+                    <mxGeometry x="450" y="200" width="200" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="cp_ai" value="AI Engine&#xa;(Scikit-Learn)" style="component;whiteSpace=wrap;html=1;fillColor=#d5e8d4;fontSize=16;" vertex="1" parent="cp1">
+                    <mxGeometry x="450" y="450" width="200" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="cp_store" value="File System&#xa;(data.json)" style="component;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontSize=16;" vertex="1" parent="cp1">
+                    <mxGeometry x="800" y="200" width="200" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="int1" value="REST API" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=12;" vertex="1" parent="cp1">
+                    <mxGeometry x="350" y="225" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="lnk1" style="endArrow=none;html=1;entryX=0;entryY=0.5;strokeWidth=2;" edge="1" parent="cp1" source="cp_client" target="int1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lnk2" style="endArrow=none;html=1;exitX=0;exitY=0.5;strokeWidth=2;" edge="1" parent="cp1" source="cp_server" target="int1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lnk3" style="endArrow=block;dashed=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;fontSize=14;" edge="1" parent="cp1" source="cp_server" target="cp_ai">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lbl3" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="lnk3">
+                    <mxGeometry x="-0.2" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lnk4" style="endArrow=block;dashed=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;fontSize=14;" edge="1" parent="cp1" source="cp_server" target="cp_store">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lbl4" value="Read/Write" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="lnk4">
+                    <mxGeometry x="-0.2" relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="Deployment" name="7. Deployment Diagram">
+        <mxGraphModel dx="2000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="dp0"/>
+                <mxCell id="dp1" parent="dp0"/>
+                <mxCell id="node_pc" value="User Device&#xa;(PC / Mobile)" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;fontSize=16;fontStyle=1" vertex="1" parent="dp1">
+                    <mxGeometry x="100" y="100" width="250" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="art_browser" value="Web Browser / Client" style="html=1;whiteSpace=wrap;fontSize=14;" vertex="1" parent="node_pc">
+                    <mxGeometry x="30" y="80" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_server" value="Host Server&#xa;(Localhost:5000)" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=20;fontSize=16;fontStyle=1" vertex="1" parent="dp1">
+                    <mxGeometry x="500" y="100" width="350" height="400" as="geometry"/>
+                </mxCell>
+                <mxCell id="env_python" value="Python Runtime" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;fontSize=14;" vertex="1" parent="node_server">
+                    <mxGeometry x="40" y="70" width="250" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="art_flask" value="app.py (Flask)" style="html=1;whiteSpace=wrap;fillColor=#dae8fc;fontSize=14;" vertex="1" parent="env_python">
+                    <mxGeometry x="30" y="60" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="art_lib" value="sklearn / numpy" style="html=1;whiteSpace=wrap;fillColor=#d5e8d4;fontSize=14;" vertex="1" parent="env_python">
+                    <mxGeometry x="30" y="150" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="art_file" value="data.json" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#f5f5f5;fontSize=14;" vertex="1" parent="node_server">
+                    <mxGeometry x="220" y="300" width="90" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="link_http" value="HTTP / JSON" style="endArrow=none;html=1;strokeWidth=3;fontSize=14;" edge="1" parent="dp1" source="node_pc" target="node_server">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
